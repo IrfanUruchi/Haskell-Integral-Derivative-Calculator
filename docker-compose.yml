@@ -1,0 +1,8 @@
+services:
+  cas:
+    image: irfanuruchi/integral-calculator:latest
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      CEREBRAS_API_KEY: ${CEREBRAS_API_KEY:-}

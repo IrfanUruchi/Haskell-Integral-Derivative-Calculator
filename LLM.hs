@@ -81,7 +81,8 @@ llmExplainSteps desc mBounds = do
       mgr     <- newManager tlsManagerSettings
       initReq <- parseRequest "https://api.cerebras.ai/v1/chat/completions"
 
-      let modelName = "qwen-3-235b-a22b-instruct-2507"
+      let modelName :: Text
+          modelName = "gpt-oss-120b"
           userMsg   = buildUserPrompt desc mBounds
 
           body      = A.object
@@ -91,7 +92,7 @@ llmExplainSteps desc mBounds = do
                 , A.object ["role" .= ("user"   :: Text), "content" .= userMsg]
                 ]
             , "temperature" .= (0.1 :: Double) 
-            , "max_tokens"  .= (200  :: Int)     
+            , "max_completion_tokens" .= (200 :: Int)     
             ]
 
           req = initReq
